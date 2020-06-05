@@ -15,5 +15,5 @@ jobs:
     steps:
     - uses: jerray/publish-docker-action@master
       with:
-        username: ${{ github.actor }}
+        username: schizofreny
         password: ${{ secrets.GITHUB_TOKEN }}
