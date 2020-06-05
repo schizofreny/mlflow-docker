@@ -15,6 +15,11 @@ jobs:
     steps:
     - name: Build and push Docker images
       uses: docker/build-push-action@v1.1.0
+      with:
+        name: owner/repository/image
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        registry: docker.pkg.github.com
 #       with:
         # Username used to log in to a Docker registry. If not set then no login will occur
 #         username: # optional
