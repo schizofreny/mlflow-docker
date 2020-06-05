@@ -15,5 +15,6 @@ jobs:
     steps:
     - uses: jerray/publish-docker-action@master
       with:
+        registry: docker.pkg.github.com
         username: schizofreny
         password: ${{ secrets.GITHUB_TOKEN }}
