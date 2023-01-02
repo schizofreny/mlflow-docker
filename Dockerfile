@@ -1,13 +1,6 @@
-FROM python:slim
+ARG VERSION=v2.1.1
 
-ARG VERSION
-ENV VERSION ${VERSION:-1.8.0}
+FROM ghcr.io/mlflow/mlflow:$VERSION
 
 RUN apt update && apt install -y libpq-dev build-essential
-
-RUN echo "Installing MLFlow ${VERSION}"
-RUN pip install mlflow==${VERSION} boto3 psycopg2
-
-EXPOSE 80
-
-
+RUN pip install boto3 psycopg2
