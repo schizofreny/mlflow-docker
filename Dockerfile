@@ -1,4 +1,4 @@
-ARG VERSION=v2.1.1
+ARG VERSION=v3.3.1
 
 FROM ghcr.io/mlflow/mlflow:$VERSION
 
