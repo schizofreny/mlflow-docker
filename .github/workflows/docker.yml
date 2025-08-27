@@ -2,10 +2,10 @@ name: Build image
 on:
   push:
     branches:
-      # Matches all branch and tag names that don't contain a slash (/).
+      # Spustí se pro všechny branche
       - "*"
     tags:
-      # Matches all semantic versioning tags
+      # Spustí se pro všechny semver tagy typu v1.2.3
       - v[0-9]+.[0-9]+.[0-9]+
 
 jobs:
@@ -17,7 +17,7 @@ jobs:
       - name: Resolve release name
         id: release
         run: |
-          RELEASE_NAME=
+          RELEASE_NAME=""
           GITHUB_REF_STRIPPED=${GITHUB_REF#refs/}
           REF_NAME=${GITHUB_REF_STRIPPED##*/}
           REF_TYPE=${GITHUB_REF_STRIPPED%/*}
@@ -29,11 +29,12 @@ jobs:
               RELEASE_NAME="$REF_NAME"
             fi
           elif [[ "$REF_TYPE" == "tags" ]]; then
+            # Odstraní prefix "v" → z v3.3.1 dostane 3.3.1
             RELEASE_NAME="${REF_NAME##v}"
           fi
 
           echo "Using $RELEASE_NAME as release name."
-          echo "::set-output name=name::$RELEASE_NAME"
+          echo "name=$RELEASE_NAME" >> $GITHUB_OUTPUT
       # setup docker
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
